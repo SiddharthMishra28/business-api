@@ -4,7 +4,8 @@ require('dotenv').config(); // Load environment variables
 const JWT_SECRET = process.env.JWT_SECRET; // Get the secret from environment variables
 
 const jwtAuth = (req, res, next) => {
-  const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
 
   if (!token) {
     return res.status(401).json({ error: 'No token provided' });
